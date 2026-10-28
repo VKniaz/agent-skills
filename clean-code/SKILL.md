@@ -67,6 +67,7 @@ The smallest correct change, proven by a test, with structure kept apart from be
 - Order: structural first when it makes the behavior change simpler. Urgent fix (production, someone blocked): the fix commit goes first, so it ships alone, and the tidy-up follows.
 - Before a structural commit, pin current behavior with tests that pass on the old code. They go in that structural commit. A structural commit may update a test's call sites for a signature change; its assertions stay the same.
 - Commit only when tests pass and your change adds no new lint findings (use the repo's configured linter; none configured, skip it). The message says which kind it is, why, and how you checked it.
+- **REQUIRED SUB-SKILL:** git-workflow, for branch names, commit messages, and PR descriptions.
 - Follow the repo's branch and PR flow. Never push to a shared or main branch unless that is the documented flow and the user asked for a push.
 
 ## 7. Quality pass (on request)
