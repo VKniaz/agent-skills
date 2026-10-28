@@ -6,6 +6,8 @@ Works with Claude Code, Codex, Cursor, and any agent that reads `SKILL.md` files
 
 ## What it combines
 
+It also names the classic principles (KISS, YAGNI, DRY, SOLID) and says when each one applies, so they don't pull against each other.
+
 | Source | What this skill takes from it |
 |---|---|
 | [Karpathy-inspired guidelines](https://github.com/forrestchang/andrej-karpathy-skills) | State assumptions, simplicity first, surgical changes, goal-driven execution |
@@ -25,7 +27,8 @@ Where the sources disagree, this skill picks one rule:
 3. **Smallest diff versus redesign.** Smallest diff by default. Redesign the touched part only when the small version would special-case two or more places.
 4. **Pushing.** ub-mode pushes to the main line at the end. Here: follow the repo's branch and PR flow, and push only when asked.
 5. **Quality gates on request.** ub-mode runs all gates on every change. Here they run on changed files only, when asked or when the tools are installed, and the agent reports missing tools instead of inventing scores.
-6. **Dropped:** worktree disk cleanup, logging every action, Cursor-specific model routing, and prose-style rules. They are not about code quality.
+6. **SOLID versus "no abstractions for single-use code".** SOLID is named, but each letter applies only when it removes a real cost. Count today's implementations: one means the concrete thing, two means a plain interface, and nothing gets a factory, registry, or plugin system for methods nobody has asked for yet.
+7. **Dropped:** worktree disk cleanup, logging every action, Cursor-specific model routing, and prose-style rules. They are not about code quality.
 
 ## Install
 

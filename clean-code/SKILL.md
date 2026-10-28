@@ -11,6 +11,20 @@ The smallest correct change, proven by a test, with structure kept apart from be
 
 **Violating the letter of these rules is violating the spirit.**
 
+## Principles, named
+
+- **KISS.** Prefer the version a new reader understands in one pass. Fewer layers, less hidden state, no clever tricks.
+- **YAGNI.** Build for today's requirement. Delete code, flags, and parameters nothing uses yet.
+- **DRY.** One decision, one place (scoped in section 5).
+- **SOLID, applied when it removes a real cost:**
+  - Single responsibility: a unit has one reason to change.
+  - Open/closed: add a case without editing a growing switch, once there are three or more cases.
+  - Liskov: a subtype works anywhere its parent does. If it would raise "not supported", do not inherit.
+  - Interface segregation: callers depend only on the methods they use.
+  - Dependency inversion: depend on an interface only at a boundary (I/O, network, clock) or when two implementations exist today.
+  - No interface, factory, registry, or layer for one implementation, or for implementations nobody has asked for yet.
+  - The user asks for "extensible" or names future cases: still build for today, and say in your reply what you left out and what adding the next case will take.
+
 ## 1. Before you code
 
 - Say your assumptions. If the request has two readings, name both.
@@ -44,14 +58,14 @@ The smallest correct change, proven by a test, with structure kept apart from be
 ## 5. DRY, scoped
 
 - Remove duplication in the code you are changing: one decision, one place.
-- Duplication in nearby code: mention it, do not fix it in this change.
+- Duplication in nearby code: mention it, do not fix it in this change. If the user asked for a tidy-up, it is in scope, in its own structural commit.
 - Extract only when the copies must change together. Look-alike code that changes for different reasons stays apart.
 
 ## 6. Commits (Tidy First)
 
 - Structural changes (rename, extract, move, delete dead code) and behavioral changes never share a commit. Each one passes the tests on its own.
 - Order: structural first when it makes the behavior change simpler. Urgent fix (production, someone blocked): the fix commit goes first, so it ships alone, and the tidy-up follows.
-- Before a structural commit, pin current behavior with tests that pass on the old code. They go in that structural commit.
+- Before a structural commit, pin current behavior with tests that pass on the old code. They go in that structural commit. A structural commit may update a test's call sites for a signature change; its assertions stay the same.
 - Commit only when tests pass and your change adds no new lint findings (use the repo's configured linter; none configured, skip it). The message says which kind it is, why, and how you checked it.
 - Follow the repo's branch and PR flow. Never push to a shared or main branch unless that is the documented flow and the user asked for a push.
 
@@ -69,6 +83,7 @@ Done means checked against the real thing (test run, command output), not "it co
 |---|---|
 | "While I'm here I'll clean this up" | Separate commit, or mention it. |
 | "I'll add an option in case they need it" | Nobody asked. Delete it. |
+| "I'll add an interface/factory so it's SOLID and extensible" | Count today's implementations. One: use the concrete thing. Two: a plain interface, no registry or plugin system. |
 | "A null check stops the crash" | Is null legitimate here? If not, find who produced it. |
 | "This test is wrong, I'll remove it" | Prove it wrong first. Then change it in its own commit. |
 | "Fix and refactor in one commit, it's faster" | Two commits. Reviewers and `git bisect` need them apart. |
