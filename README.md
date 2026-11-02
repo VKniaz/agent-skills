@@ -6,8 +6,8 @@ Works with Claude Code, Codex, Cursor, and any agent that reads `SKILL.md` files
 
 | Skill | Use it for |
 |---|---|
-| [clean-code](clean-code/SKILL.md) | Writing, fixing, refactoring, and committing code: KISS, YAGNI, DRY, SOLID, TDD, Tidy First, root causes |
-| [git-workflow](git-workflow/SKILL.md) | Branch names, commit messages, and PR descriptions tied to a ticket key, with no AI attribution |
+| [clean-code](skills/clean-code/SKILL.md) | Writing, fixing, refactoring, and committing code: KISS, YAGNI, DRY, SOLID, TDD, Tidy First, root causes |
+| [git-workflow](skills/git-workflow/SKILL.md) | Branch names, commit messages, and PR descriptions tied to a ticket key, with no AI attribution |
 
 ## Install
 
@@ -16,7 +16,7 @@ Claude Code:
 ```bash
 git clone https://github.com/VKniaz/agent-skills
 mkdir -p ~/.claude/skills
-cp -R agent-skills/clean-code agent-skills/git-workflow ~/.claude/skills/
+cp -R agent-skills/skills/clean-code agent-skills/skills/git-workflow ~/.claude/skills/
 ```
 
 Other agents: copy the skill folders into that agent's skills directory (for example `~/.agents/skills/` or `~/.cursor/skills/`).
@@ -54,7 +54,7 @@ It names the classic principles (KISS, YAGNI, DRY, SOLID) and says when each one
 7. **SOLID versus "no abstractions for single-use code".** Each SOLID letter applies only when it removes a real cost. One implementation means the concrete thing, two means a plain interface, and nothing gets a factory, registry, or plugin system for cases nobody has asked for.
 8. **Dropped:** worktree disk cleanup, logging every action, Cursor-specific model routing, and prose-style rules.
 
-Optional quality gates: see [clean-code/quality-gates.md](clean-code/quality-gates.md).
+Optional quality gates: see [skills/clean-code/quality-gates.md](skills/clean-code/quality-gates.md).
 
 ## git-workflow
 
