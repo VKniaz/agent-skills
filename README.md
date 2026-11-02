@@ -11,23 +11,34 @@ Works with Claude Code, Codex, Cursor, and any agent that reads `SKILL.md` files
 
 ## Install
 
-Claude Code:
+New machine, everything at once:
 
 ```bash
-git clone https://github.com/VKniaz/agent-skills
-mkdir -p ~/.claude/skills
-cp -R agent-skills/skills/clean-code agent-skills/skills/git-workflow ~/.claude/skills/
+git clone https://github.com/VKniaz/agent-skills ~/projects/agent-skills
+~/projects/agent-skills/install.sh
 ```
 
-Other agents: copy the skill folders into that agent's skills directory (for example `~/.agents/skills/` or `~/.cursor/skills/`).
+The script is safe to rerun. It:
 
-The skills load on their own when an agent writes code, creates a branch, commits, or opens a PR. They work best alongside [superpowers](https://github.com/obra/superpowers), which clean-code points to for TDD and verification, but they work without it.
+1. Installs the skills as a Claude Code plugin, together with [superpowers](https://github.com/obra/superpowers).
+2. Symlinks `skills/*` into `~/.agents/skills/` (read by Codex, Copilot CLI, and Gemini CLI) and into `~/.cursor/skills/` when Cursor is installed.
+3. Sets `"attribution": {"commit": "", "pr": "", "sessionUrl": false}` in `~/.claude/settings.json`, so Claude Code stops adding `Co-Authored-By` and "Generated with" lines. This step needs `jq`.
 
-To stop Claude Code adding `Co-Authored-By` trailers and "Generated with" lines at the source, also add this to `~/.claude/settings.json`:
+Claude Code only:
 
-```json
-"attribution": { "commit": "", "pr": "", "sessionUrl": false }
+```bash
+claude plugin marketplace add VKniaz/agent-skills
+claude plugin install agent-skills@vkniaz
 ```
+
+In Claude Code the skills are named `agent-skills:clean-code` and `agent-skills:git-workflow`.
+
+### Updating
+
+- Claude Code: `claude plugin marketplace update vkniaz && claude plugin update agent-skills@vkniaz`, or turn on auto-update for the `vkniaz` marketplace in `/plugin`. Bump `version` in `.claude-plugin/plugin.json` and `marketplace.json` when you change a skill, so installed copies see the new version.
+- Other agents: `git pull` in the clone. The symlinks pick up the change.
+
+The skills load on their own when an agent writes code, creates a branch, commits, or opens a PR. They work best alongside superpowers, which clean-code points to for TDD and verification, but they work without it.
 
 ## clean-code
 

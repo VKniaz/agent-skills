@@ -1,0 +1,14 @@
+{
+  "name": "vkniaz",
+  "description": "VKniaz's agent skills",
+  "owner": { "name": "VKniaz" },
+  "plugins": [
+    {
+      "name": "agent-skills",
+      "description": "Clean code (KISS, YAGNI, DRY, SOLID, TDD, Tidy First) and ticket-based git workflow skills",
+      "version": "1.0.0",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}

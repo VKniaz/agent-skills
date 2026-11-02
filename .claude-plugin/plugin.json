@@ -1,0 +1,10 @@
+{
+  "name": "agent-skills",
+  "description": "Clean code (KISS, YAGNI, DRY, SOLID, TDD, Tidy First) and ticket-based git workflow skills",
+  "version": "1.0.0",
+  "author": { "name": "VKniaz" },
+  "homepage": "https://github.com/VKniaz/agent-skills",
+  "repository": "https://github.com/VKniaz/agent-skills",
+  "license": "MIT",
+  "keywords": ["skills", "clean-code", "tdd", "git", "pull-requests"]
+}
